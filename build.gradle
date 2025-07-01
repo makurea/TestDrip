@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.11.2'
+}
+
+group = 'com.testdrip'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url "https://plugins.gradle.org/m2/" }
+}
+
+dependencies {
+    // Allure
+    testImplementation 'io.qameta.allure:allure-junit5:2.21.0'
+    testImplementation 'io.qameta.allure:allure-cucumber7-jvm:2.21.0'
+
+    // JUnit 5
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testImplementation 'org.junit.platform:junit-platform-suite-api:1.10.0'
+
+    // Cucumber
+    testImplementation 'io.cucumber:cucumber-java:7.14.0'
+    testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.14.0'
+
+    // Rest Assured
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
+
+    // AssertJ
+    testImplementation 'org.assertj:assertj-core:3.25.3'
+}
+
+allure {
+    version = '2.21.0'
+    autoconfigure = true
+    aspectjweaver = true
+}
+
+test {
+    useJUnitPlatform()
+}
