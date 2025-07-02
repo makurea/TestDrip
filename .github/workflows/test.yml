@@ -1,10 +1,8 @@
-name: Run API Tests
+name: test-and-publish
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   test:
@@ -19,5 +17,20 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Run tests with Gradle
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Run tests
         run: ./gradlew clean test
+
+      - name: Generate Allure report
+        run: ./gradlew allureReport
+
+      - name: Deploy Allure report to GitHub Pages 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/reports/allure-report
+          publish_branch: gh-pages
+          keep_files: true
+
