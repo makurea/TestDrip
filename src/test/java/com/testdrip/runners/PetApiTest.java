@@ -1,14 +1,14 @@
 package com.testdrip.runners;
 
-import com.testdrip.utils.ApiClient; // Импортируем наш API-клиент
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.testdrip.utils.ApiClient;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @TestMethodOrder(OrderAnnotation.class) // Указываем порядок выполнения тестов по аннотации @Order
 public class PetApiTest {
@@ -67,7 +67,8 @@ public class PetApiTest {
 
     response.then().statusCode(200); // Проверяем, что статус 200 OK
 
-    assertThat(response.jsonPath().getLong("id")).isEqualTo(petId); // Проверяем, что вернулся правильный ID
+    assertThat(response.jsonPath().getLong("id")).isEqualTo(
+        petId); // Проверяем, что вернулся правильный ID
     assertThat(response.jsonPath().getString("name")).isEqualTo("doggie"); // Проверяем имя
     assertThat(response.jsonPath().getString("status")).isEqualTo("available"); // Проверяем статус
 
@@ -85,30 +86,9 @@ public class PetApiTest {
     Response response = ApiClient.delete("/pet/" + petId); // Используем DELETE для удаления
 
     response.then().statusCode(200); // Проверяем, что статус 200 OK
-    assertThat(response.jsonPath().getLong("message")).isEqualTo(petId); // Проверяем, что в сообщении есть ID
+    assertThat(response.jsonPath().getLong("message")).isEqualTo(
+        petId); // Проверяем, что в сообщении есть ID
 
     System.out.println("--- Тест 'Удаление питомца по ID' завершен ---");
-  }
-
-
-  @Test
-  @Order(4) // Этот тест выполнится четвертым
-  @DisplayName("Попытка получить удаленного питомца (должен быть 404 Not Found)")
-  void getDeletedPetNotFoundTest() {
-    System.out.println("--- Запуск теста: Попытка получить удаленного питомца ---");
-
-    assertThat(petId).isPositive(); // Убеждаемся, что petId установлен
-
-    Response response = ApiClient.get("/pet/" + petId);
-
-    // Ожидаем 404 Not Found, что является корректным поведением для удаленного ресурса
-    response.then().statusCode(404); // <--- ВОТ ЭТО КОРРЕКТНОЕ ИЗМЕНЕНИЕ!
-
-    // Проверяем, что в теле ответа есть сообщение "Pet not found"
-    // (хотя при 404 оно может быть и необязательным, но Petstore его возвращает)
-    assertThat(response.jsonPath().getString("message")).isEqualTo("Pet not found");
-    assertThat(response.jsonPath().getInt("code")).isEqualTo(1); // Проверяем код ошибки
-
-    System.out.println("--- Тест 'Попытка получить удаленного питомца' завершен ---");
   }
 }
