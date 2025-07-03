@@ -25,9 +25,11 @@ jobs:
 
       - name: Run tests and generate Allure results
         run: ./gradlew clean test # allurereport уже будет вызван через finalizedBy
-        env:
-        # Можно добавить системные проперти для Allure, если нужно
-        # ALLURE_RESULTS_DIRECTORY: build/allure-results
+        # Удалена пустая строка 'env:' и закомментированные строки,
+        # так как они вызывают ошибку, если нет реальных env переменных.
+        # Если захотите добавить env переменные позже, добавьте их так:
+        # env:
+        #   MY_VAR: 'my_value'
 
       - name: Get Allure history # Шаг для получения истории предыдущих отчетов
         uses: actions/checkout@v4
