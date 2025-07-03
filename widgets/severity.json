@@ -1,1 +1,1 @@
-[{"uid":"6723869344528411","name":"Verify creation of a new pet in Petstore","time":{"start":1751541461550,"stop":1751541464646,"duration":3096},"status":"passed","severity":"normal"}]
+[{"uid":"606772a9609537b2","name":"Retrieve details for a specific capsule by serial","time":{"start":1751544755489,"stop":1751544755734,"duration":245},"status":"passed","severity":"normal"},{"uid":"a394ddaa80b11556","name":"Retrieve details for a specific capsule by serial","time":{"start":1751544752299,"stop":1751544755367,"duration":3068},"status":"passed","severity":"normal"}]
