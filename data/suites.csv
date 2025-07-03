@@ -1,4 +1,2 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"failed","Thu Jul 03 10:41:20 GMT 2025","Thu Jul 03 10:41:20 GMT 2025","85","","com.testdrip.runners.PetApiTest","","com.testdrip.runners.PetApiTest","deletePetTest","Удаление питомца по ID",""
-"passed","Thu Jul 03 10:41:20 GMT 2025","Thu Jul 03 10:41:20 GMT 2025","108","","com.testdrip.runners.PetApiTest","","com.testdrip.runners.PetApiTest","getPetByIdTest","Получение питомца по ID",""
-"passed","Thu Jul 03 10:41:17 GMT 2025","Thu Jul 03 10:41:20 GMT 2025","3045","","com.testdrip.runners.PetApiTest","","com.testdrip.runners.PetApiTest","createNewPetTest","Создание нового питомца",""
+"passed","Thu Jul 03 11:17:41 GMT 2025","Thu Jul 03 11:17:44 GMT 2025","3096","","com.testdrip.runners.PetApiTest","","com.testdrip.runners.PetApiTest","createNewPetTest","Verify creation of a new pet in Petstore",""
