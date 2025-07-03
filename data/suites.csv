@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Thu Jul 03 10:32:27 GMT 2025","Thu Jul 03 10:32:27 GMT 2025","65","","com.testdrip.runners.PetApiTest","","com.testdrip.runners.PetApiTest","deletePetTest","Удаление питомца по ID",""
+"passed","Thu Jul 03 10:32:24 GMT 2025","Thu Jul 03 10:32:27 GMT 2025","2832","","com.testdrip.runners.PetApiTest","","com.testdrip.runners.PetApiTest","createNewPetTest","Создание нового питомца",""
+"failed","Thu Jul 03 10:32:27 GMT 2025","Thu Jul 03 10:32:27 GMT 2025","80","","com.testdrip.runners.PetApiTest","","com.testdrip.runners.PetApiTest","getDeletedPetNotFoundTest","Попытка получить удаленного питомца (должен быть 404)",""
+"passed","Thu Jul 03 10:32:27 GMT 2025","Thu Jul 03 10:32:27 GMT 2025","102","","com.testdrip.runners.PetApiTest","","com.testdrip.runners.PetApiTest","getPetByIdTest","Получение питомца по ID",""
