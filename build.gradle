@@ -7,36 +7,67 @@ group = 'com.testdrip'
 version = '1.0-SNAPSHOT'
 
 repositories {
+    gradlePluginPortal()
     mavenCentral()
-    maven { url "https://plugins.gradle.org/m2/" }
 }
 
 dependencies {
     // Allure
     testImplementation 'io.qameta.allure:allure-junit5:2.21.0'
-    testImplementation 'io.qameta.allure:allure-cucumber7-jvm:2.21.0'
 
     // JUnit 5
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
-    testImplementation 'org.junit.platform:junit-platform-suite-api:1.10.0'
+    testImplementation 'org.junit.platform:junit-platform-suite-api:1.10.2'
 
-    // Cucumber
-    testImplementation 'io.cucumber:cucumber-java:7.14.0'
-    testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.14.0'
-
-    // Rest Assured
-    testImplementation 'io.rest-assured:rest-assured:5.4.0'
-
-    // AssertJ
+    // AssertJ (можно оставить для простых проверок)
     testImplementation 'org.assertj:assertj-core:3.25.3'
+
+    testImplementation 'org.slf4j:slf4j-simple:1.7.36'
+
+    // --- ДОБАВЬТЕ ЭТИ СТРОКИ ДЛЯ RESTASSURED ---
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
+    testImplementation 'io.rest-assured:json-path:5.4.0'
+    testImplementation 'io.rest-assured:xml-path:5.4.0' // Если используете XML Path
+    // --- КОНЕЦ ДОБАВЛЕННЫХ СТРОК ---
 }
 
 allure {
     version = '2.21.0'
     autoconfigure = true
-    aspectjweaver = true
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["src/main/resources"]
+        }
+    }
+    test {
+        java {
+            srcDirs = ["src/test/java"]
+        }
+        resources {
+            srcDirs = ["src/test/resources"]
+        }
+    }
 }
 
 test {
     useJUnitPlatform()
+    finalizedBy allureReport
+    systemProperty "allure.results.directory", "$buildDir/allure-results"
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+        exceptionFormat "full"
+        showStandardStreams = true
+    }
 }

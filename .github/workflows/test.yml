@@ -3,34 +3,56 @@ name: test-and-publish
 on:
   push:
     branches: [ main ]
+  workflow_dispatch: # Добавим возможность запускать вручную
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4 # Рекомендуется использовать последнюю версию
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4 # Рекомендуется использовать последнюю версию
         with:
           distribution: 'temurin'
           java-version: '17'
+          cache: 'gradle' # Добавим кэширование Gradle для ускорения сборки
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Run tests
-        run: ./gradlew clean test
+      - name: Run tests and generate Allure results
+        run: ./gradlew clean test # allurereport уже будет вызван через finalizedBy
+        env:
+        # Можно добавить системные проперти для Allure, если нужно
+        # ALLURE_RESULTS_DIRECTORY: build/allure-results
 
-      - name: Generate Allure report
-        run: ./gradlew allureReport
+      - name: Get Allure history # Шаг для получения истории предыдущих отчетов
+        uses: actions/checkout@v4
+        if: always() # Выполнять всегда, даже если тесты упали
+        continue-on-error: true # Не останавливать workflow, если ветки gh-pages ещё нет
+        with:
+          ref: gh-pages # Клонируем ветку gh-pages
+          path: gh-pages # В эту папку будут клонированы файлы из gh-pages
+
+      - name: Generate Allure Report # Генерация отчёта с историей
+        uses: simple-elf/allure-report-action@v1.9 # Используем этот action для Allure
+        id: allure_report # Дадим ID для дальнейшего использования
+        if: always() # Выполнять всегда
+        with:
+          allure_results: build/allure-results # Папка с сырыми результатами тестов
+          allure_history: gh-pages/allure-history # Папка, куда будет сохраняться история (из клонированной gh-pages)
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # keep_reports: 20 # Опционально: сколько последних отчетов хранить (для этого action)
 
       - name: Deploy Allure report to GitHub Pages 🚀
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4 # Используем последнюю версию
+        if: always() # Выполнять всегда
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build/reports/allure-report/allureReport
+          # publish_dir: build/reports/allure-report/allureReport # Этот путь был бы, если бы мы генерировали report руками
+          publish_dir: allure-history # simple-elf/allure-report-action складывает готовый report сюда
           publish_branch: gh-pages
-          keep_files: true
-
+          # keep_files: true # Этот параметр здесь не нужен, так как simple-elf/allure-report-action сам управляет файлами истории
