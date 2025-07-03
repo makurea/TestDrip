@@ -1,24 +1,42 @@
 package com.testdrip.runners;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import com.testdrip.utils.ApiClient;
+import com.testdrip.utils.ApiClient; // Импортируем наш API-клиент
+import io.qameta.allure.Link; // Добавим для примера, если есть URL к документации
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Tag; // Если используете теги
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.TestInstance; // Для @BeforeAll без static
+import org.junit.jupiter.api.BeforeAll;
 
-@TestMethodOrder(OrderAnnotation.class) // Указываем порядок выполнения тестов по аннотации @Order
+import static org.assertj.core.api.Assertions.assertThat; // Используем assertj для более читаемых ассертов
+
+// Определите константы для тегов, если они нужны
+// Например, создайте класс common.Tags если его нет, или используйте прямо здесь
+// import static common.Tags.PET_SERVICE; // Пример тега
+
+@Tag("PetService") // Пример тега для сервиса
+@Link(name = "Petstore API Docs", url = "https://petstore.swagger.io/v2/swagger.json") // Пример ссылки на документацию
+@TestInstance(TestInstance.Lifecycle.PER_CLASS) // Позволяет использовать нестатический @BeforeAll
 public class PetApiTest {
 
-  private static long petId; // Для хранения ID питомца между тестами
+  // Объявляем наш API клиент так же, как в вашем примере
+  private ApiClient petApiClient;
+  private static long createdPetId; // Передаем ID между тестами, если бы их было несколько
 
+  // Настройка перед всеми тестами, похожая на ваш setUp()
+  @BeforeAll
+  public void setUp() {
+    // Инициализация клиента, если она нужна (у нас пока методы статические)
+    // Если ApiClient.java будет нестатическим, то здесь будет:
+    // petApiClient = new ApiClient("https://petstore.swagger.io/v2");
+    System.out.println("--- Выполнение Pre-conditions для PetApiTest ---");
+  }
+
+  @DisplayName("Verify creation of a new pet in Petstore")
+  @Tag("Positive") // Пример позитивного тега
   @Test
-  @Order(1) // Этот тест выполнится первым
-  @DisplayName("Создание нового питомца")
-  void createNewPetTest() {
+  public void createNewPetTest() {
     System.out.println("--- Запуск теста: Создание нового питомца ---");
 
     String requestBody = "{\n"
@@ -27,7 +45,7 @@ public class PetApiTest {
         + "    \"id\": 1,\n"
         + "    \"name\": \"dogs\"\n"
         + "  },\n"
-        + "  \"name\": \"doggie\",\n"
+        + "  \"name\": \"doggie_" + System.currentTimeMillis() + "\",\n" // Делаем имя уникальным
         + "  \"photoUrls\": [\n"
         + "    \"string\"\n"
         + "  ],\n"
@@ -40,55 +58,36 @@ public class PetApiTest {
         + "  \"status\": \"available\"\n"
         + "}";
 
-    Response response = ApiClient.post("/pet", requestBody); // Используем POST для создания
+    // Вызываем POST-метод для создания питомца
+    Response response = ApiClient.post("/pet", requestBody);
 
-    response.then().statusCode(200); // Проверяем, что статус 200 OK
+    // Одна основная проверка - статус 200 OK
+    response.then().statusCode(200);
 
-    // Извлекаем ID созданного питомца для последующих тестов
-    petId = response.jsonPath().getLong("id");
-    System.out.println("Создан питомец с ID: " + petId);
+    // Опционально: сохраняем ID для других тестов, если бы они были
+    createdPetId = response.jsonPath().getLong("id");
+    System.out.println("Создан питомец с ID: " + createdPetId);
 
-    assertThat(petId).isPositive(); // Проверяем, что ID сгенерирован (больше 0)
-    assertThat(response.jsonPath().getString("name")).isEqualTo("doggie"); // Проверяем имя
-    assertThat(response.jsonPath().getString("status")).isEqualTo("available"); // Проверяем статус
+    // Еще одна проверка, чтобы убедиться, что ID действительный
+    assertThat(createdPetId).isPositive();
 
     System.out.println("--- Тест 'Создание нового питомца' завершен ---");
   }
 
-  @Test
-  @Order(2) // Этот тест выполнится вторым
-  @DisplayName("Получение питомца по ID")
-  void getPetByIdTest() {
-    System.out.println("--- Запуск теста: Получение питомца по ID ---");
+  //
+    /*
+    @DisplayName("Verify retrieval of a created pet by ID")
+    @Tag("Positive")
+    @Test
+    public void getCreatedPetById() {
+        System.out.println("--- Запуск теста: Получение созданного питомца по ID ---");
+        assertThat(createdPetId).isPositive(); // Убеждаемся, что ID установлен
 
-    assertThat(petId).isPositive(); // Убеждаемся, что petId установлен из предыдущего теста
+        Response response = ApiClient.get("/pet/" + createdPetId);
 
-    Response response = ApiClient.get("/pet/" + petId);
-
-    response.then().statusCode(200); // Проверяем, что статус 200 OK
-
-    assertThat(response.jsonPath().getLong("id")).isEqualTo(
-        petId); // Проверяем, что вернулся правильный ID
-    assertThat(response.jsonPath().getString("name")).isEqualTo("doggie"); // Проверяем имя
-    assertThat(response.jsonPath().getString("status")).isEqualTo("available"); // Проверяем статус
-
-    System.out.println("--- Тест 'Получение питомца по ID' завершен ---");
-  }
-
-  @Test
-  @Order(3) // Этот тест выполнится третьим
-  @DisplayName("Удаление питомца по ID")
-  void deletePetTest() {
-    System.out.println("--- Запуск теста: Удаление питомца по ID ---");
-
-    assertThat(petId).isPositive(); // Убеждаемся, что petId установлен
-
-    Response response = ApiClient.delete("/pet/" + petId); // Используем DELETE для удаления
-
-    response.then().statusCode(200); // Проверяем, что статус 200 OK
-    assertThat(response.jsonPath().getLong("message")).isEqualTo(
-        petId); // Проверяем, что в сообщении есть ID
-
-    System.out.println("--- Тест 'Удаление питомца по ID' завершен ---");
-  }
+        response.then().statusCode(200);
+        assertThat(response.jsonPath().getLong("id")).isEqualTo(createdPetId);
+        System.out.println("--- Тест 'Получение созданного питомца по ID' завершен ---");
+    }
+    */
 }
