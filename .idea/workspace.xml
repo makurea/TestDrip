@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="410bcbac-5722-4a6b-b80f-25759ad367f5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/testdrip/runners/SimpleTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/testdrip/runners/TestRunner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/testdrip/stepdefinitions/PetSteps.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/testdrip/utils/ApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/testdrip/utils/ApiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/features/pets.feature" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +84,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.PetApiTest.executor": "Run",
     "Gradle.SimpleTest.executor": "Run",
     "Gradle.TestDrip [build].executor": "Run",
     "Gradle.TestDrip [clean].executor": "Run",
@@ -234,7 +225,7 @@
       <workItem from="1751460553567" duration="344000" />
       <workItem from="1751460905316" duration="3060000" />
       <workItem from="1751479305150" duration="2546000" />
-      <workItem from="1751533152440" duration="4242000" />
+      <workItem from="1751533152440" duration="5519000" />
     </task>
     <servers />
   </component>

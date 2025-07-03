@@ -92,7 +92,7 @@ public class PetApiTest {
 
   @Test
   @Order(4) // Этот тест выполнится четвертым
-  @DisplayName("Попытка получить удаленного питомца (должен быть 404)")
+  @DisplayName("Попытка получить удаленного питомца (должен быть 200, но с сообщением 'Pet not found')")
   void getDeletedPetNotFoundTest() {
     System.out.println("--- Запуск теста: Попытка получить удаленного питомца ---");
 
@@ -100,7 +100,13 @@ public class PetApiTest {
 
     Response response = ApiClient.get("/pet/" + petId);
 
-    response.then().statusCode(404); // Ожидаем 404 Not Found
+    // Petstore API возвращает 200 OK даже после DELETE,
+    // но с сообщением "Pet not found" в теле ответа.
+    response.then().statusCode(200); // Ожидаем 200 OK от Petstore API
+
+    // Проверяем, что в теле ответа есть сообщение "Pet not found"
+    assertThat(response.jsonPath().getString("message")).isEqualTo("Pet not found");
+    assertThat(response.jsonPath().getInt("code")).isEqualTo(1); // Проверяем код ошибки
 
     System.out.println("--- Тест 'Попытка получить удаленного питомца' завершен ---");
   }
