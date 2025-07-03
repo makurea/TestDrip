@@ -1,6 +1,15 @@
+
+
 plugins {
     id 'java'
     id 'io.qameta.allure' version '2.11.2'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+tasks.withType(Test) {
+    systemProperty "file.encoding", "UTF-8"
 }
 
 group = 'com.testdrip'
@@ -24,11 +33,24 @@ dependencies {
 
     testImplementation 'org.slf4j:slf4j-simple:1.7.36'
 
-    // --- ДОБАВЬТЕ ЭТИ СТРОКИ ДЛЯ RESTASSURED ---
+    // --- RESTASSURED ---
     testImplementation 'io.rest-assured:rest-assured:5.4.0'
     testImplementation 'io.rest-assured:json-path:5.4.0'
     testImplementation 'io.rest-assured:xml-path:5.4.0' // Если используете XML Path
-    // --- КОНЕЦ ДОБАВЛЕННЫХ СТРОК ---
+
+    // --- ДОБАВЛЕНЫ НОВЫЕ ЗАВИСИМОСТИ ДЛЯ CUCUMBER И ALLURE CUCUMBER ---
+    // Cucumber BOM (Bill of Materials) для управления версиями
+    implementation platform('io.cucumber:cucumber-bom:7.18.0') // Используем последнюю стабильную версию
+
+    // Cucumber Core
+    testImplementation 'io.cucumber:cucumber-java'
+    testImplementation 'io.cucumber:cucumber-junit-platform-engine' // Для запуска через JUnit Platform
+
+    // Allure Cucumber (чтобы Allure мог генерировать отчёты из Cucumber-результатов)
+    testImplementation 'io.qameta.allure:allure-cucumber7-jvm:2.27.0' // Версия должна соответствовать cucumber-bom
+
+    // Для выполнения тестов JUnit 5 с Cucumber
+    testImplementation 'org.junit.platform:junit-platform-suite'
 }
 
 allure {
@@ -62,12 +84,20 @@ sourceSets {
 
 test {
     useJUnitPlatform()
-    finalizedBy allureReport
-    systemProperty "allure.results.directory", "$buildDir/allure-results"
+
+    systemProperties = [
+            'cucumber.features': 'src/test/resources/features/',
+            'cucumber.glue': 'com.testdrip.steps', // <--- Пакет с шагами остается прежним
+            'allure.results.directory': 'build/allure-results'
+    ]
 
     testLogging {
-        events "passed", "skipped", "failed", "standardOut", "standardError"
-        exceptionFormat "full"
-        showStandardStreams = true
+        events "passed", "skipped", "failed"
     }
+
+    doFirst {
+        delete fileTree(dir: 'build/allure-results', include: '**/*')
+    }
+
+    finalizedBy tasks.allureReport
 }
