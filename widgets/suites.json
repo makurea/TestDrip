@@ -1,1 +1,1 @@
-{"total":1,"items":[{"uid":"b05316a95699ab45d75d35903a2bf486","name":"com.testdrip.runners.PetApiTest","statistic":{"failed":2,"broken":0,"skipped":0,"passed":2,"unknown":0,"total":4}}]}
+{"total":1,"items":[{"uid":"b05316a95699ab45d75d35903a2bf486","name":"com.testdrip.runners.PetApiTest","statistic":{"failed":1,"broken":0,"skipped":0,"passed":2,"unknown":0,"total":3}}]}
