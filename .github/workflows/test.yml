@@ -11,50 +11,42 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4 # Рекомендуется использовать последнюю версию
+        uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4 # Рекомендуется использовать последнюю версию
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
-          cache: 'gradle' # Добавим кэширование Gradle для ускорения сборки
+          cache: 'gradle'
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Run tests and generate Allure results
-        run: ./gradlew clean test # allurereport уже будет вызван через finalizedBy
-        # Удалена пустая строка 'env:' и закомментированные строки,
-        # так как они вызывают ошибку, если нет реальных env переменных.
-        # Если захотите добавить env переменные позже, добавьте их так:
-        # env:
-        #   MY_VAR: 'my_value'
+        run: ./gradlew clean test
 
       - name: Get Allure history # Шаг для получения истории предыдущих отчетов
         uses: actions/checkout@v4
-        if: always() # Выполнять всегда, даже если тесты упали
-        continue-on-error: true # Не останавливать workflow, если ветки gh-pages ещё нет
+        if: always()
+        continue-on-error: true
         with:
-          ref: gh-pages # Клонируем ветку gh-pages
-          path: gh-pages # В эту папку будут клонированы файлы из gh-pages
+          ref: gh-pages
+          path: gh-pages
 
       - name: Generate Allure Report # Генерация отчёта с историей
-        uses: simple-elf/allure-report-action@v1.9 # Используем этот action для Allure
-        id: allure_report # Дадим ID для дальнейшего использования
-        if: always() # Выполнять всегда
+        uses: simple-elf/allure-report-action@v1.9
+        id: allure_report
+        if: always()
         with:
-          allure_results: build/allure-results # Папка с сырыми результатами тестов
-          allure_history: gh-pages/allure-history # Папка, куда будет сохраняться история (из клонированной gh-pages)
+          allure_results: build/allure-results
+          allure_history: gh-pages/allure-history
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # keep_reports: 20 # Опционально: сколько последних отчетов хранить (для этого action)
 
       - name: Deploy Allure report to GitHub Pages 🚀
-        uses: peaceiris/actions-gh-pages@v4 # Используем последнюю версию
-        if: always() # Выполнять всегда
+        uses: peaceiris/actions-gh-pages@v4
+        if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # publish_dir: build/reports/allure-report/allureReport # Этот путь был бы, если бы мы генерировали report руками
-          publish_dir: allure-history # simple-elf/allure-report-action складывает готовый report сюда
+          publish_dir: allure-report # <--- ИЗМЕНЕНО ЗДЕСЬ!
           publish_branch: gh-pages
-          # keep_files: true # Этот параметр здесь не нужен, так как simple-elf/allure-report-action сам управляет файлами истории
