@@ -1,5 +1,3 @@
-
-
 plugins {
     id 'java'
     id 'io.qameta.allure' version '2.11.2'
@@ -28,26 +26,26 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
     testImplementation 'org.junit.platform:junit-platform-suite-api:1.10.2'
 
-    // AssertJ (можно оставить для простых проверок)
+    // AssertJ
     testImplementation 'org.assertj:assertj-core:3.25.3'
 
     testImplementation 'org.slf4j:slf4j-simple:1.7.36'
 
-    // --- RESTASSURED ---
+    //  RESTASSURED
     testImplementation 'io.rest-assured:rest-assured:5.4.0'
     testImplementation 'io.rest-assured:json-path:5.4.0'
-    testImplementation 'io.rest-assured:xml-path:5.4.0' // Если используете XML Path
+    testImplementation 'io.rest-assured:xml-path:5.4.0'
 
-    // --- ДОБАВЛЕНЫ НОВЫЕ ЗАВИСИМОСТИ ДЛЯ CUCUMBER И ALLURE CUCUMBER ---
-    // Cucumber BOM (Bill of Materials) для управления версиями
-    implementation platform('io.cucumber:cucumber-bom:7.18.0') // Используем последнюю стабильную версию
+    // CUCUMBER И ALLURE CUCUMBER
+    // Cucumber BOM (Bill of Materials)
+    implementation platform('io.cucumber:cucumber-bom:7.18.0')
 
     // Cucumber Core
     testImplementation 'io.cucumber:cucumber-java'
-    testImplementation 'io.cucumber:cucumber-junit-platform-engine' // Для запуска через JUnit Platform
+    testImplementation 'io.cucumber:cucumber-junit-platform-engine'
 
     // Allure Cucumber (чтобы Allure мог генерировать отчёты из Cucumber-результатов)
-    testImplementation 'io.qameta.allure:allure-cucumber7-jvm:2.27.0' // Версия должна соответствовать cucumber-bom
+    testImplementation 'io.qameta.allure:allure-cucumber7-jvm:2.27.0'
 
     // Для выполнения тестов JUnit 5 с Cucumber
     testImplementation 'org.junit.platform:junit-platform-suite'

@@ -6,7 +6,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import static org.assertj.core.api.Assertions.assertThat; // Используем AssertJ для удобных проверок
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SpaceXCapsulesSteps {
 
@@ -24,9 +24,9 @@ public class SpaceXCapsulesSteps {
   public void iRequestCapsuleDetailsForSerial(String capsuleSerial) {
     System.out.println("Requesting details for capsule serial: " + capsuleSerial);
     response = RestAssured.given()
-        .pathParam("capsule_serial", capsuleSerial) // Указываем параметр пути
-        .get("/capsules/{capsule_serial}"); // Используем шаблон пути
-    response.prettyPrint(); // Выводим полный ответ для отладки
+        .pathParam("capsule_serial", capsuleSerial)
+        .get("/capsules/{capsule_serial}");
+    response.prettyPrint();
   }
 
   @Then("the response status code is {int}")

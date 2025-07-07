@@ -3,7 +3,7 @@ name: test-and-publish
 on:
   push:
     branches: [ main ]
-  workflow_dispatch: # Добавим возможность запускать вручную
+  workflow_dispatch:
 
 jobs:
   test:
@@ -26,7 +26,7 @@ jobs:
       - name: Run tests and generate Allure results
         run: ./gradlew clean test
 
-      - name: Get Allure history # Шаг для получения истории предыдущих отчетов
+      - name: Get Allure history
         uses: actions/checkout@v4
         if: always()
         continue-on-error: true
@@ -48,5 +48,5 @@ jobs:
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: allure-report # <--- ИЗМЕНЕНО ЗДЕСЬ!
+          publish_dir: allure-report
           publish_branch: gh-pages
