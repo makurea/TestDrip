@@ -29,7 +29,13 @@ dependencies {
     // AssertJ
     testImplementation 'org.assertj:assertj-core:3.25.3'
 
-    testImplementation 'org.slf4j:slf4j-simple:1.7.36'
+    // Log4j2
+    testImplementation 'org.apache.logging.log4j:log4j-api:2.21.0'
+    testImplementation 'org.apache.logging.log4j:log4j-core:2.21.0'
+
+    // Мост между SLF4J и Log4j2
+    testImplementation 'org.apache.logging.log4j:log4j-slf4j2-impl:2.21.0'
+
 
     //  RESTASSURED
     testImplementation 'io.rest-assured:rest-assured:5.4.0'
@@ -85,12 +91,13 @@ test {
 
     systemProperties = [
             'cucumber.features': 'src/test/resources/features/',
-            'cucumber.glue': 'com.testdrip.steps', // <--- Пакет с шагами остается прежним
+            'cucumber.glue': 'com.testdrip.steps',
             'allure.results.directory': 'build/allure-results'
     ]
 
     testLogging {
         events "passed", "skipped", "failed"
+        showStandardStreams = true
     }
 
     doFirst {
@@ -99,3 +106,4 @@ test {
 
     finalizedBy tasks.allureReport
 }
+
