@@ -4,7 +4,7 @@ Feature: SpaceX Capsules API
   I want to retrieve details about specific capsules
 
   Scenario: Retrieve details for a specific capsule by serial
-    Given the SpaceX API base URI "https://api.spacexdata.com/v3"
+#   Given the SpaceX API base URI "https://api.spacexdata.com/v3"
     When I request capsule details for serial "C112"
     Then the response status code is 200
     And the capsule serial in the response is "C112"

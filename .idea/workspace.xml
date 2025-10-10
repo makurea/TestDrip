@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="410bcbac-5722-4a6b-b80f-25759ad367f5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/resources/log4j2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/testdrip/service/SpaceXService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/testdrip/utils/ConfigManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/testdrip/utils/Endpoints.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/testdrip/steps/SpaceXCapsulesSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/testdrip/steps/SpaceXCapsulesSteps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/testdrip/utils/ApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/testdrip/utils/ApiClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/features/spacex_api.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/spacex_api.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,29 +89,49 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build TestDrip.executor": "Run",
-    "Gradle.PetApiTest.executor": "Run",
-    "Gradle.SimpleTest.executor": "Run",
-    "Gradle.TestDrip [build].executor": "Run",
-    "Gradle.TestDrip [clean].executor": "Run",
-    "Gradle.TestRunner.executor": "Run",
-    "JUnit.Whole project.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "GrepConsole",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Cucumber Java.Scenario: Retrieve details for a specific capsule by serial.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build TestDrip.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PetApiTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.SimpleTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TestDrip [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TestDrip [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TestRunner.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.Whole project.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;GrepConsole&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="JUnit.Whole project">
+}</component>
+  <component name="RunManager" selected="Gradle.TestDrip [build]">
+    <configuration name="Scenario: Retrieve details for a specific capsule by serial" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/spacex_api.feature" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="TestDrip.test" />
+      <option name="NAME_FILTER" value="^Retrieve details for a specific capsule by serial$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Retrieve details for a specific capsule by serial$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Retrieve details for a specific capsule by serial" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PetApiTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -122,30 +146,6 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;com.testdrip.runners.PetApiTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="SimpleTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;com.testdrip.runners.SimpleTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -212,11 +212,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Whole project" />
-        <item itemvalue="Gradle.TestDrip [clean]" />
-        <item itemvalue="Gradle.PetApiTest" />
-        <item itemvalue="Gradle.SimpleTest" />
         <item itemvalue="Gradle.TestDrip [build]" />
+        <item itemvalue="Gradle.TestDrip [clean]" />
+        <item itemvalue="Cucumber Java.Scenario: Retrieve details for a specific capsule by serial" />
+        <item itemvalue="JUnit.Whole project" />
+        <item itemvalue="Gradle.PetApiTest" />
       </list>
     </recent_temporary>
   </component>
@@ -254,7 +254,9 @@
       <workItem from="1753607539795" duration="80000" />
       <workItem from="1754812207965" duration="16000" />
       <workItem from="1755254005653" duration="302000" />
-      <workItem from="1760033770455" duration="859000" />
+      <workItem from="1760033770455" duration="1331000" />
+      <workItem from="1760102655264" duration="5019000" />
+      <workItem from="1760117698709" duration="926000" />
     </task>
     <servers />
   </component>

@@ -6,45 +6,37 @@ import io.restassured.response.Response;
 
 public class ApiClient {
 
-  private static final String BASE_URI = "https://petstore.swagger.io/v2";
+  private final String baseUri;
 
-  public static Response get(String path) {
+  public ApiClient(String baseUri) {
+    this.baseUri = baseUri;
+  }
+
+  public Response get(String path) {
     return RestAssured
         .given()
-        .baseUri(BASE_URI)
-        .header("Accept", "application/json")
-        .log().all()
+        .baseUri(baseUri)
+        .accept(ContentType.JSON)
+        .log().uri()
         .when()
         .get(path)
         .then()
-        .log().all()
-        .extract()
-        .response();
-  }
-  public static Response post(String path, String body) {
-    return RestAssured
-        .given()
-        .baseUri(BASE_URI)
-        .contentType(ContentType.JSON)
-        .body(body)
-        .log().all()
-        .when()
-        .post(path)
-        .then()
-        .log().all()
+        .log().body()
         .extract()
         .response();
   }
 
-  public static Response delete(String path) {
+  public Response getWithParam(String path, String paramName, String paramValue) {
     return RestAssured
         .given()
-        .baseUri(BASE_URI)
-        .log().all()
+        .baseUri(baseUri)
+        .pathParam(paramName, paramValue)
+        .accept(ContentType.JSON)
+        .log().uri()
         .when()
-        .delete(path)
+        .get(path)
         .then()
-        .log().all()
+        .log().body()
         .extract()
         .response();
   }
