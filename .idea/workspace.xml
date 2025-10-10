@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="410bcbac-5722-4a6b-b80f-25759ad367f5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/testdrip/service/SpaceXService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/testdrip/utils/ConfigManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/testdrip/utils/Endpoints.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/testdrip/steps/SpaceXCapsulesSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/testdrip/steps/SpaceXCapsulesSteps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/testdrip/utils/ApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/testdrip/utils/ApiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/features/spacex_api.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/spacex_api.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +106,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Gradle.TestDrip [build]">
+  <component name="RunManager" selected="Gradle.TestDrip [clean]">
     <configuration name="Scenario: Retrieve details for a specific capsule by serial" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/spacex_api.feature" />
@@ -212,8 +206,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.TestDrip [build]" />
         <item itemvalue="Gradle.TestDrip [clean]" />
+        <item itemvalue="Gradle.TestDrip [build]" />
         <item itemvalue="Cucumber Java.Scenario: Retrieve details for a specific capsule by serial" />
         <item itemvalue="JUnit.Whole project" />
         <item itemvalue="Gradle.PetApiTest" />
@@ -256,7 +250,7 @@
       <workItem from="1755254005653" duration="302000" />
       <workItem from="1760033770455" duration="1331000" />
       <workItem from="1760102655264" duration="5019000" />
-      <workItem from="1760117698709" duration="926000" />
+      <workItem from="1760117698709" duration="1647000" />
     </task>
     <servers />
   </component>
